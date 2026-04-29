@@ -1,0 +1,24 @@
+{
+  "name": "blog-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ai-blog 的独立运维 agent:写文、发布、健康巡检、通知",
+  "bin": {
+    "blog-agent": "bin/agent.mjs"
+  },
+  "scripts": {
+    "agent": "node bin/agent.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
