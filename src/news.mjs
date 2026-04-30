@@ -106,7 +106,7 @@ const SYSTEM_NEWS = `你是 "AI 技术博客" 的新闻编辑,每日汇总英文
 title: AI 新闻日报 · YYYY-MM-DD
 slug: news-YYYY-MM-DD
 date: YYYY-MM-DD
-category: AI 新闻
+category: AI-新闻
 tags: [日报, 新闻]
 summary: 今日 N 条值得关注:xxx、yyy、zzz。
 draft: false

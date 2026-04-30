@@ -15,8 +15,8 @@ describe('news module', () => {
     expect(src).toMatch(/export async function generateDaily/);
   });
 
-  it('uses correct category AI 新闻', () => {
-    expect(src).toMatch(/category: AI 新闻/);
+  it('uses correct category AI-新闻 (无空格,URL 友好)', () => {
+    expect(src).toMatch(/category: AI-新闻/);
   });
 
   it('has parseRSS supporting both rss and atom', () => {
