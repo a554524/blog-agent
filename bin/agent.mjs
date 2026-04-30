@@ -14,6 +14,7 @@
 import { writePost, writeTool, revisePost } from '../src/write.mjs';
 import { publishPost, deploy } from '../src/publish.mjs';
 import { status, pendingDrafts, staleTools, health } from '../src/ops.mjs';
+import { generateDaily } from '../src/news.mjs';
 import { config } from '../src/config.mjs';
 
 const HELP = `blog-agent — ai-blog 运维 CLI
@@ -22,6 +23,7 @@ const HELP = `blog-agent — ai-blog 运维 CLI
   write <topic...>      AI 生成一篇草稿 (draft:true) 到 content/posts
   write-tool <name>     AI 生成工具条目到 content/tools
   revise <slug>         LLM 润色已有文章 (就地覆盖)
+  news-daily            抓 RSS + LLM 合成今日 AI 新闻日报
 
 发布:
   publish <slug>        将文章 draft:false + git commit + push
@@ -103,6 +105,16 @@ async function main() {
       console.log(`✓ slug=${r.slug}`);
       console.log(`  文件:${r.file}${r.written ? '' : ' (dry-run)'}`);
       if (dryRun) console.log('\n--- 内容预览 ---\n' + r.markdown.slice(0, 600));
+      return;
+    }
+
+    case 'news-daily': {
+      console.log('⚙ 抓 RSS + LLM 合成今日 AI 新闻...');
+      const r = await generateDaily({ dryRun });
+      if (r.message) console.log(r.message);
+      if (r.candidateCount !== undefined) console.log(`  候选:${r.candidateCount} 条`);
+      console.log(`  文件:${r.file}${r.written ? '' : ' (未写入)'}`);
+      if (dryRun && r.markdown) console.log('\n--- 预览 ---\n' + r.markdown.slice(0, 1200));
       return;
     }
 
